@@ -1,0 +1,34 @@
+String-Template version 0.01
+============================
+
+Exports a single function expand_string($template, \%fields).
+
+Fills in a simple template with values from a hash, replacing tokens
+like "<fieldname>" with the value from the hash $fields->{fieldname}.
+
+Some special characters can be used to impose formatting on the
+fields:
+
+ % - treat like a sprintf() format
+ : - treat like a L<POSIX::strftime()> format
+
+For the ':' strftime formats, the field is parsed by L<Date::Parse>,
+so it can handle any format that can handle.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+  POSIX, Date::Parse
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2008 by NASA Goddard Space Flight Center
