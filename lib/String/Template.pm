@@ -10,7 +10,7 @@ use DateTime::Format::Strptime;
 
 our @EXPORT = qw(expand_string untemplate);
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my %special =
 (
