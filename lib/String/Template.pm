@@ -6,8 +6,9 @@ use warnings;
 use base 'Exporter';
 use POSIX;
 use Date::Parse;
+use DateTime::Format::Strptime;
 
-our @EXPORT = qw(expand_string);
+our @EXPORT = qw(expand_string untemplate);
 
 our $VERSION = '0.01';
 
@@ -20,6 +21,12 @@ my %special =
 my $specials = join('', keys %special);
 my $specialre = qr/^([^$specials]+)([$specials])(.+)$/;
 
+#
+# _replace($field, \%fields)
+#
+# replace a single "<field> or "<field%sprintf format>"
+# or "<field:strftime format>"
+#
 sub _replace
 {
     my ($field, $f) = @_;
@@ -33,13 +40,61 @@ sub _replace
     return defined $f->{$field} ? $f->{$field} : $field;
 }
 
+#
+# expand_string($string, \%fields)
+# find "<fieldname>" or "<fieldname%sprintf format>"
+# or "<fieldname:strftime format>" and replace them
+#
 sub expand_string
 {
-    my ($s, $f) = @_;
+    my ($string, $fields) = @_;
 
-    $s =~ s/<([^>]+)>/_replace($1, $f)/ge;
+    $string =~ s/<([^>]+)>/_replace($1, $fields)/ge;
 
-    return $s;
+    return $string;
+}
+
+#
+# untemplate($template, $regex, $string)
+# Attempt to go backwards with a regular expression, template
+# and string to a record of fields.
+#
+sub untemplate
+{
+    my ($template, $re, $str) = @_;
+
+    my %rec;
+
+    my @fields = $template =~ /<([^>]+)>/g;
+
+    @fields = map { s/%.*$// unless /:/; $_ } @fields;
+
+    my @vals = $str =~ $re;
+
+    for (my $i = 0; $i < @fields; $i++)
+    {
+        if ($fields[$i] =~ /([^:]+):(.+)$/)
+        {
+            $rec{$1}{format} .= "$2 ";
+            $rec{$1}{value}  .= "$vals[$i] ";
+        }
+        else
+        {
+            $rec{$fields[$i]} = $vals[$i];
+        }
+    }
+
+    foreach my $field (keys %rec)
+    {
+        if (ref $rec{$field})
+        {
+            my $strp = DateTime::Format::Strptime->new
+                (pattern => $rec{$field}{format});
+            my $dt = $strp->parse_datetime($rec{$field}{value});
+            $rec{$field} = gmtime $dt->epoch;
+        }
+    }
+    return \%rec;
 }
 
 1;
@@ -61,9 +116,20 @@ String::Template - Fills in string templates from hash of fields
 
   prints: "...0002...this...2008/02/27..."
 
+
+  my $re = qr/...(\d{4})...(\w+)...(\d{4}/\d{2}/\d{2}.../;
+
+  my $rec = untemplate($template, $re, $string);
+
+  $rec = {
+             'str'  => 'this',
+             'num'  => '0002',
+             'date' => 'Wed Feb 27 00:00:00 2008'
+         };
+
 =head1 DESCRIPTION
 
-Exports a single function expand_string($template, \%fields).
+=head2 $str = expand_string($template, \%fields).
 
 Fills in a simple template with values from a hash, replacing tokens
 like "<fieldname>" with the value from the hash $fields->{fieldname}.
@@ -76,6 +142,13 @@ fields:
 
 For the ':' strftime formats, the field is parsed by L<Date::Parse>,
 so it can handle any format that can handle.
+
+=head2 $record = untemplate($template, $regex, $string)
+
+Attempts (dates are, in particular, problematic), to go backwards,
+constructing the record of fields from the template, string,
+and a regular expression with capturing parens identical to the
+regular expression.
 
 =head1 SEE ALSO
 
