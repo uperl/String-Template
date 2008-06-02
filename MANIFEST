@@ -2,5 +2,7 @@ Changes
 Makefile.PL
 MANIFEST
 README
-t/String-Template.t
 lib/String/Template.pm
+t/Basic.t
+t/Expand.t
+

@@ -10,7 +10,7 @@ use DateTime::Format::Strptime;
 
 our @EXPORT = qw(expand_string untemplate);
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 my %special =
 (
@@ -37,7 +37,7 @@ sub _replace
         return $special{$2}($3,$f->{$1});
     }
 
-    return defined $f->{$field} ? $f->{$field} : $field;
+    return defined $f->{$field} ? $f->{$field} : '';
 }
 
 #
@@ -157,7 +157,7 @@ syntax.
 
 =head1 AUTHOR
 
-Curt Tilmes, E<lt>curt@tilmes.orgE<gt>
+Curt Tilmes, E<lt>ctilmes@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
