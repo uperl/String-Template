@@ -1,5 +1,5 @@
-String-Template version 0.01
-============================
+String-Template
+===============
 
 Exports a single function expand_string($template, \%fields).
 
@@ -10,9 +10,10 @@ Some special characters can be used to impose formatting on the
 fields:
 
  % - treat like a sprintf() format
- : - treat like a L<POSIX::strftime()> format
+ : - treat like a POSIX::strftime() format
+ # - treat like a substr()
 
-For the ':' strftime formats, the field is parsed by L<Date::Parse>,
+For the ':' strftime formats, the field is parsed by Date::Parse,
 so it can handle any format that can handle.
 
 INSTALLATION

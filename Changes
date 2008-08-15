@@ -1,8 +1,12 @@
 Revision history for Perl extension String::Template.
 
-0.01  Fri Mar  7 10:49:14 2008
-	- original version;
+0.03  Fri Aug 15 07:58:45 EDT 2008
+        - Added '#' special for expanding with substr
+        - Remove untemplate()
 
-0.03  Mon Jun  2 07:57:06 EDT 2008
+0.02  Mon Jun  2 07:57:06 EDT 2008
         - If fields are undefined, just replace with ''
         - Added more test cases
+
+0.01  Fri Mar  7 10:49:14 2008
+	- original version

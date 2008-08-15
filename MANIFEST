@@ -5,4 +5,3 @@ README
 lib/String/Template.pm
 t/Basic.t
 t/Expand.t
-

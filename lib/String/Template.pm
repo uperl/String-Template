@@ -8,14 +8,22 @@ use POSIX;
 use Date::Parse;
 use DateTime::Format::Strptime;
 
-our @EXPORT = qw(expand_string untemplate);
+our @EXPORT = qw(expand_string);
 
 our $VERSION = '0.03';
+
+use Data::Dumper;
 
 my %special =
 (
     '%' => sub { sprintf("%$_[0]", $_[1]) },
-    ':' => sub { strftime($_[0], localtime(str2time($_[1]))) }
+
+    ':' => sub { strftime($_[0], localtime(str2time($_[1]))) },
+
+    '#' => sub { my @args = split(/\s*,\s*/, $_[0]);
+                 defined $args[1]
+                 ? substr($_[1], $args[0], $args[1])
+                 : substr($_[1], $args[0]) }
 );
 
 my $specials = join('', keys %special);
@@ -33,7 +41,7 @@ sub _replace
 
     if ($field =~ $specialre)
     {
-        return $field unless defined $f->{$1};
+        return '' unless defined $f->{$1};
         return $special{$2}($3,$f->{$1});
     }
 
@@ -42,8 +50,7 @@ sub _replace
 
 #
 # expand_string($string, \%fields)
-# find "<fieldname>" or "<fieldname%sprintf format>"
-# or "<fieldname:strftime format>" and replace them
+# find "<fieldname>"
 #
 sub expand_string
 {
@@ -52,49 +59,6 @@ sub expand_string
     $string =~ s/<([^>]+)>/_replace($1, $fields)/ge;
 
     return $string;
-}
-
-#
-# untemplate($template, $regex, $string)
-# Attempt to go backwards with a regular expression, template
-# and string to a record of fields.
-#
-sub untemplate
-{
-    my ($template, $re, $str) = @_;
-
-    my %rec;
-
-    my @fields = $template =~ /<([^>]+)>/g;
-
-    @fields = map { s/%.*$// unless /:/; $_ } @fields;
-
-    my @vals = $str =~ $re;
-
-    for (my $i = 0; $i < @fields; $i++)
-    {
-        if ($fields[$i] =~ /([^:]+):(.+)$/)
-        {
-            $rec{$1}{format} .= "$2 ";
-            $rec{$1}{value}  .= "$vals[$i] ";
-        }
-        else
-        {
-            $rec{$fields[$i]} = $vals[$i];
-        }
-    }
-
-    foreach my $field (keys %rec)
-    {
-        if (ref $rec{$field})
-        {
-            my $strp = DateTime::Format::Strptime->new
-                (pattern => $rec{$field}{format});
-            my $dt = $strp->parse_datetime($rec{$field}{value});
-            $rec{$field} = gmtime $dt->epoch;
-        }
-    }
-    return \%rec;
 }
 
 1;
@@ -116,17 +80,6 @@ String::Template - Fills in string templates from hash of fields
 
   prints: "...0002...this...2008/02/27..."
 
-
-  my $re = qr/...(\d{4})...(\w+)...(\d{4}/\d{2}/\d{2}.../;
-
-  my $rec = untemplate($template, $re, $string);
-
-  $rec = {
-             'str'  => 'this',
-             'num'  => '0002',
-             'date' => 'Wed Feb 27 00:00:00 2008'
-         };
-
 =head1 DESCRIPTION
 
 =head2 $str = expand_string($template, \%fields).
@@ -138,17 +91,16 @@ Some special characters can be used to impose formatting on the
 fields:
 
  % - treat like a sprintf() format
+     e.g.  <int%02d>
+
  : - treat like a L<POSIX::strftime()> format
+     e.g. <date:%Y-%m-%d>
+
+ # - treat like ars to substr()
+     e.g. <str#0,2> or <str#4>
 
 For the ':' strftime formats, the field is parsed by L<Date::Parse>,
 so it can handle any format that can handle.
-
-=head2 $record = untemplate($template, $regex, $string)
-
-Attempts (dates are, in particular, problematic), to go backwards,
-constructing the record of fields from the template, string,
-and a regular expression with capturing parens identical to the
-regular expression.
 
 =head1 SEE ALSO
 
