@@ -5,5 +5,5 @@ WriteMakefile(
     PREREQ_PM         => {Date::Parse => 0},
     ($] >= 5.005 ?
       (ABSTRACT_FROM  => 'lib/String/Template.pm',
-       AUTHOR         => 'C. Tilmes <curt@tilmes.org') : ()),
+       AUTHOR         => 'C. Tilmes <ctilmes@cpan.org') : ()),
 );

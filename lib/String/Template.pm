@@ -10,7 +10,7 @@ use DateTime::Format::Strptime;
 
 our @EXPORT = qw(expand_string);
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use Data::Dumper;
 
@@ -30,33 +30,34 @@ my $specials = join('', keys %special);
 my $specialre = qr/^([^$specials]+)([$specials])(.+)$/;
 
 #
-# _replace($field, \%fields)
+# _replace($field, \%fields, $undef_flag)
 #
 # replace a single "<field> or "<field%sprintf format>"
 # or "<field:strftime format>"
 #
 sub _replace
 {
-    my ($field, $f) = @_;
+    my ($field, $f, $undef_flag) = @_;
 
     if ($field =~ $specialre)
     {
-        return '' unless defined $f->{$1};
+        return ($undef_flag ? "<$field>" : '') unless defined $f->{$1};
         return $special{$2}($3,$f->{$1});
     }
 
-    return defined $f->{$field} ? $f->{$field} : '';
+    return defined $f->{$field} ? $f->{$field}
+                                : ($undef_flag ? "<$field>" : '');
 }
 
 #
-# expand_string($string, \%fields)
+# expand_string($string, \%fields, $undef_flag)
 # find "<fieldname>"
 #
 sub expand_string
 {
-    my ($string, $fields) = @_;
+    my ($string, $fields, $undef_flag) = @_;
 
-    $string =~ s/<([^>]+)>/_replace($1, $fields)/ge;
+    $string =~ s/<([^>]+)>/_replace($1, $fields, $undef_flag)/ge;
 
     return $string;
 }
@@ -82,7 +83,7 @@ String::Template - Fills in string templates from hash of fields
 
 =head1 DESCRIPTION
 
-=head2 $str = expand_string($template, \%fields).
+=head2 $str = expand_string($template, \%fields, $undef_flag).
 
 Fills in a simple template with values from a hash, replacing tokens
 like "<fieldname>" with the value from the hash $fields->{fieldname}.
@@ -101,6 +102,11 @@ fields:
 
 For the ':' strftime formats, the field is parsed by L<Date::Parse>,
 so it can handle any format that can handle.
+
+Handling of undefined fields can be controlled with $undef_flag.  If
+it is false (default), undefined fields are simply replace with an
+empty string.  If set to true, the field is kept verbatim.  This can
+be useful for multiple expansion passes.
 
 =head1 SEE ALSO
 
