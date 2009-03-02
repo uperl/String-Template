@@ -1,5 +1,8 @@
 Revision history for Perl extension String::Template.
 
+0.05  Mon Mar  2 16:45:09 EST 2009
+        - Added '!' special for date/times from UTC
+
 0.04  Wed Sep  3 08:50:11 EDT 2008
         - Added $undef_flag to control handling of undefined fields
 

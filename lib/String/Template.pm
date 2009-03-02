@@ -10,7 +10,7 @@ use DateTime::Format::Strptime;
 
 our @EXPORT = qw(expand_string);
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 use Data::Dumper;
 
@@ -19,6 +19,8 @@ my %special =
     '%' => sub { sprintf("%$_[0]", $_[1]) },
 
     ':' => sub { strftime($_[0], localtime(str2time($_[1]))) },
+
+    '!' => sub { strftime($_[0], gmtime(str2time($_[1]))) },
 
     '#' => sub { my @args = split(/\s*,\s*/, $_[0]);
                  defined $args[1]
@@ -96,6 +98,9 @@ fields:
 
  : - treat like a L<POSIX::strftime()> format
      e.g. <date:%Y-%m-%d>
+
+ ! - Just like ':', but with gmtime instead of localtime
+     e.g. <gmdate!%Y-%m-%d %H:%M>
 
  # - treat like ars to substr()
      e.g. <str#0,2> or <str#4>

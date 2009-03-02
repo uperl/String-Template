@@ -1,6 +1,8 @@
 use Test::More;
 use String::Template;
 
+$ENV{TZ} = 'EST5EDT'; # override so test in local TZ will succeed
+
 my @TestCases =
 (
     {
@@ -44,6 +46,12 @@ my @TestCases =
         Template => '  <foo>  <date:%Y-%m-%d> ',
         Fields   => { foo => 12, date => 'May 17, 2008'},
         Correct  => '  12  2008-05-17 '
+    },
+    {
+        Name     => 'date format with :(local) and !(utc)',
+        Template => 'local: <date:%Y-%m-%d %H:%M> utc: <date!%Y-%m-%d %H:%M>',
+        Fields   => { date => '2008-02-27T17:57:00Z' },
+        Correct  => 'local: 2008-02-27 12:57 utc: 2008-02-27 17:57'
     }
 );
 

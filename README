@@ -11,6 +11,7 @@ fields:
 
  % - treat like a sprintf() format
  : - treat like a POSIX::strftime() format
+ ! - Just like ':', but with gmtime() instead of localtime()
  # - treat like a substr()
 
 For the ':' strftime formats, the field is parsed by Date::Parse,
