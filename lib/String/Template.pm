@@ -8,9 +8,9 @@ use POSIX;
 use Date::Parse;
 use DateTime::Format::Strptime;
 
-our @EXPORT = qw(expand_string);
+our @EXPORT = qw(expand_string missing_values);
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 use Data::Dumper;
 
@@ -64,6 +64,19 @@ sub expand_string
     return $string;
 }
 
+sub missing_values
+{
+    my ($string, $fields, $dont_allow_undefs) = @_;
+    my @missing;
+
+    while ($string =~ /<([^>$specials]+)(?:[$specials][^>]+)?>/g) {
+        next if exists($fields->{$1}) && (!$dont_allow_undefs || defined($fields->{$1}));
+        push @missing, $1;
+    }
+    return unless @missing;
+    return @missing;
+}
+
 1;
 __END__
 
@@ -112,6 +125,14 @@ Handling of undefined fields can be controlled with $undef_flag.  If
 it is false (default), undefined fields are simply replace with an
 empty string.  If set to true, the field is kept verbatim.  This can
 be useful for multiple expansion passes.
+
+=head2 @missing = missing_values($template, \%fields, $dont_allow_undefs)
+
+Checks to see if the template variables in a string template exist
+in a hash.  Set $dont_allow_undefs to 1 to also check to see if the
+values for all such keys are defined.
+
+Returns a list of missing keys or an empty list if no keys were missing.
 
 =head1 SEE ALSO
 

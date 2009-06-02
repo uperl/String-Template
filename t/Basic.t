@@ -13,3 +13,5 @@ my $correct = "...0002...this...2008/02/27...\n";
 my $exp = expand_string($template, \%fields);
 
 is($exp, $correct, "test expand");
+
+
