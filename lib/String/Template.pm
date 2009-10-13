@@ -9,10 +9,9 @@ use Date::Parse;
 use DateTime::Format::Strptime;
 
 our @EXPORT = qw(expand_string missing_values);
+our @EXPORT_OK = qw(expand_hash);
 
-our $VERSION = '0.06';
-
-use Data::Dumper;
+our $VERSION = '0.07';
 
 my %special =
 (
@@ -77,6 +76,35 @@ sub missing_values
     return @missing;
 }
 
+sub expand_hash
+{
+    my ($hash, $maxdepth) = @_;
+
+    $maxdepth ||= 10;
+
+    my $changeflag = 1;
+    my $missing = 1;
+
+    while ($changeflag)
+    {    
+	$changeflag = 0;
+	$missing = 0;
+	foreach my $key (sort keys %$hash)
+	{
+	    my $newstr = expand_string($hash->{$key}, $hash, 1);
+	    
+	    if ($newstr ne $hash->{$key})
+	    {
+		$hash->{$key} = $newstr;
+		$changeflag = 1;
+	    }
+	    $missing++ if $newstr =~ /<[^>]+>/;
+	}
+	last unless --$maxdepth;
+    }
+    return $missing ? undef : 1;
+}
+
 1;
 __END__
 
@@ -134,17 +162,16 @@ values for all such keys are defined.
 
 Returns a list of missing keys or an empty list if no keys were missing.
 
+=head2 $status = expand_hash($hash[, $maxdepth]);
+
+Expand a hash of templates/values.  This function will repeatedly
+replace templates in the values of the hash with the values of the
+hash they reference, until either all "<>" templates are gone, or
+it has iterated $maxdepth times (default 10).
+
+Returns undef if there are unexpanded templates left, otherwise true.
+
 =head1 SEE ALSO
 
 L<String::Format> performs a similar function, with a different
 syntax.
-
-=head1 AUTHOR
-
-Curt Tilmes, E<lt>ctilmes@cpan.orgE<gt>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright (C) 2008 by NASA Goddard Space Flight Center
-
-=cut

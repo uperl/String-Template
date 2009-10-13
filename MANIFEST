@@ -6,3 +6,7 @@ lib/String/Template.pm
 t/Basic.t
 t/Expand.t
 t/Undef.t
+t/Check.t
+t/expand_hash.t
+eg/example.pl
+eg/hashexample.pl
