@@ -8,7 +8,7 @@ use POSIX;
 use Date::Parse;
 use DateTime::Format::Strptime;
 
-our @EXPORT = qw(expand_string missing_values);
+our @EXPORT = qw(expand_string missing_values expand_stringi);
 our @EXPORT_OK = qw(expand_hash);
 
 our $VERSION = '0.07';
@@ -59,6 +59,16 @@ sub expand_string
     my ($string, $fields, $undef_flag) = @_;
 
     $string =~ s/<([^>]+)>/_replace($1, $fields, $undef_flag)/ge;
+
+    return $string;
+}
+
+sub expand_stringi
+{
+    my ($string, $fields, $undef_flag) = @_;
+    my %ifields = map { lc $_ => $fields->{$_} } keys %$fields;
+
+    $string =~ s/<([^>]+)>/_replace(lc $1, \%ifields, $undef_flag)/gie;
 
     return $string;
 }
@@ -153,6 +163,11 @@ Handling of undefined fields can be controlled with $undef_flag.  If
 it is false (default), undefined fields are simply replace with an
 empty string.  If set to true, the field is kept verbatim.  This can
 be useful for multiple expansion passes.
+
+=head2 $str = expand_stringi($template, \%fields, $undef_flag).
+
+expand_stringi works just like expand_string, except that tokens
+and hash keys are treated case insensitively.
 
 =head2 @missing = missing_values($template, \%fields, $dont_allow_undefs)
 
