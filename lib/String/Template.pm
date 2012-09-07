@@ -38,15 +38,16 @@ my $specialre = qr/^([^$specials]+)([$specials])(.+)$/;
 #
 sub _replace
 {
-    my ($field, $f, $undef_flag) = @_;
+    my ($field, $f, $undef_flag, $i_flag) = @_;
 
     if ($field =~ $specialre)
     {
-        return ($undef_flag ? "<$field>" : '') unless defined $f->{$1};
-        return $special{$2}($3,$f->{$1});
+        return ($undef_flag ? "<$field>" : '') unless defined $f->{($i_flag ? lc($1) : $1)};
+        return $special{$2}($3,$f->{($i_flag ? lc($1) : $1)});
     }
 
-    return defined $f->{$field} ? $f->{$field}
+    my $ifield = $i_flag ? lc $field : $field;
+    return defined $f->{$ifield} ? $f->{$ifield}
                                 : ($undef_flag ? "<$field>" : '');
 }
 
@@ -68,7 +69,7 @@ sub expand_stringi
     my ($string, $fields, $undef_flag) = @_;
     my %ifields = map { lc $_ => $fields->{$_} } keys %$fields;
 
-    $string =~ s/<([^>]+)>/_replace(lc $1, \%ifields, $undef_flag)/gie;
+    $string =~ s/<([^>]+)>/_replace($1, \%ifields, $undef_flag, 1)/gie;
 
     return $string;
 }
