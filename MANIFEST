@@ -1,12 +1,14 @@
 Changes
-Makefile.PL
-MANIFEST
-README
-lib/String/Template.pm
-t/Basic.t
-t/Expand.t
-t/Undef.t
-t/Check.t
-t/expand_hash.t
 eg/example.pl
 eg/hashexample.pl
+lib/String/Template.pm
+Makefile.PL
+MANIFEST			This list of files
+META.yml
+README
+t/Basic.t
+t/Check.t
+t/Expand.t
+t/expand_hash.t
+t/Insensitive.t
+t/Undef.t
