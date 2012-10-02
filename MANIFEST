@@ -12,3 +12,4 @@ t/Expand.t
 t/expand_hash.t
 t/Insensitive.t
 t/Undef.t
+META.json

@@ -187,6 +187,12 @@ it has iterated $maxdepth times (default 10).
 
 Returns undef if there are unexpanded templates left, otherwise true.
 
+=head1 AUTHOR
+
+  Brian Duggan
+
+  Curt Tilmes
+
 =head1 SEE ALSO
 
 L<String::Format> performs a similar function, with a different

@@ -1,0 +1,43 @@
+{
+   "abstract" : "Fills in string templates from hash of fields",
+   "author" : [
+      "Brian Duggan <brian.duggan@nasa.gov>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.112621",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "String-Template",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.40"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Date::Parse" : 0,
+            "DateTime::Format::Strptime" : 0,
+            "POSIX" : 0
+         }
+      }
+   },
+   "provides" : {
+      "String::Template" : {
+         "file" : "lib/String/Template.pm",
+         "version" : "0.09"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ]
+   },
+   "version" : "0.09"
+}
