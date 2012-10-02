@@ -154,7 +154,7 @@ fields:
  ! - Just like ':', but with gmtime instead of localtime
      e.g. <gmdate!%Y-%m-%d %H:%M>
 
- # - treat like ars to substr()
+ # - treat like args to substr()
      e.g. <str#0,2> or <str#4>
 
 For the ':' strftime formats, the field is parsed by L<Date::Parse>,
