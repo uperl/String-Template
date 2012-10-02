@@ -1,5 +1,8 @@
 Revision history for Perl extension String::Template.
 
+0.10  Tue Oct  2 11:35:04 EDT 2012
+        - cleanup for public release
+
 0.09  Fri Sep  7 14:58:46 EDT 2012
         - expand_stringi now supports special chars
 
