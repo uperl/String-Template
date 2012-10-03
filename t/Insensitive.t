@@ -2,6 +2,8 @@ use Test::More tests => 10;
 
 BEGIN { use_ok('String::Template') };
 
+$ENV{TZ} = 'EST5EDT'; # override so test in local TZ will succeed
+
 #########################
 
 my %fields = ( num => 2, str => 'this', date => 'Feb 27, 2008' );
