@@ -8,6 +8,7 @@ WriteMakefile
                    'Date::Parse' => 0,
                    'DateTime::Format::Strptime' => 0,
                    'POSIX' => 0
+                   $^O eq 'MSWin32' ? ('Time::Piece' => '1.17') : (),
                  },
   'INSTALLDIRS' => 'site',
   'EXE_FILES' => [],

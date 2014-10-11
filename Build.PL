@@ -12,6 +12,7 @@ my $builder = Module::Build->new(
         'Date::Parse' => 0,
         POSIX => 0,
         'DateTime::Format::Strptime' => 0,
+        $^O eq 'MSWin32' ? ('Time::Piece' => '1.17') : (),
     },
     add_to_cleanup      => [ 'String-Template-*' ],
     create_makefile_pl => 'traditional',
