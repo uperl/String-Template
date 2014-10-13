@@ -4,7 +4,7 @@
       "Brian Duggan <brian.duggan@nasa.gov>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.112621",
+   "generated_by" : "Module::Build version 0.421",
    "license" : [
       "perl_5"
    ],
@@ -16,28 +16,34 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.40"
+            "Module::Build" : "0.36"
          }
       },
       "runtime" : {
          "requires" : {
-            "Date::Parse" : 0,
-            "DateTime::Format::Strptime" : 0,
-            "POSIX" : 0
+            "Date::Parse" : "0",
+            "DateTime::Format::Strptime" : "0",
+            "POSIX" : "0"
          }
       }
    },
    "provides" : {
       "String::Template" : {
          "file" : "lib/String/Template.pm",
-         "version" : "0.11"
+         "version" : "0.12"
       }
    },
    "release_status" : "stable",
    "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/plicease/String-Template/issues"
+      },
       "license" : [
          "http://dev.perl.org/licenses/"
-      ]
+      ],
+      "repository" : {
+         "url" : "https://github.com/plicease/String-Template"
+      }
    },
-   "version" : "0.11"
+   "version" : "0.12"
 }
