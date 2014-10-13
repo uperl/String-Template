@@ -12,10 +12,21 @@ my $builder = Module::Build->new(
         'Date::Parse' => 0,
         POSIX => 0,
         'DateTime::Format::Strptime' => 0,
+    },
+    test_requires => {
         $^O eq 'MSWin32' ? ('Time::Piece' => '1.17') : (),
+    },
+    configure_requires => {
+        'Module::Build' => 0.36,
     },
     add_to_cleanup      => [ 'String-Template-*' ],
     create_makefile_pl => 'traditional',
+    meta_merge => {
+        resources => {
+            repository => 'https://github.com/plicease/String-Template',
+            bugtracker => 'https://github.com/plicease/String-Template/issues',
+        },
+    },
 );
 
 $builder->create_build_script();
