@@ -20,7 +20,6 @@ my $builder = Module::Build->new(
         'Module::Build' => 0.36,
     },
     add_to_cleanup      => [ 'String-Template-*' ],
-    create_makefile_pl => 'traditional',
     meta_merge => {
         resources => {
             repository => 'https://github.com/plicease/String-Template',
