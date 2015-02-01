@@ -6,14 +6,27 @@ Some special formats can impose formatting on the fields.
 
 INSTALLATION
 
-To install this module type the following:
+To install this module, use CPAN, for example:
 
-   perl Makefile.PL
-   make
-   make test
-   make install
+  cpan String::Template
+
+To instead build this software from source, run:
+
+  perl Build.PL
+  ./Build
+  ./Build test
+  ./Build install
+
+After installing, you can read the documentation for this module via:
+
+  perldoc String::Template
 
 DEPENDENCIES
 
 This module requires these other modules and libraries:
   POSIX, Date::Parse, DateTime::Format::Strptime
+
+LICENSE
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of the the Artistic License (2.0).
