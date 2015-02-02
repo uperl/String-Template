@@ -189,11 +189,27 @@ Returns undef if there are unexpanded templates left, otherwise true.
 
 =head1 AUTHOR
 
-  Brian Duggan
+=over 4
 
-  Curt Tilmes
+=item Current maintainer: Graham Ollis <plicease@cpan.org>
+
+=item Brian Duggan
+
+=item Curt Tilmes
+
+=back
 
 =head1 SEE ALSO
 
 L<String::Format> performs a similar function, with a different
 syntax.
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is cpyright 2015 by Brian Duggan
+
+This is free software; you can redistribute it and/or modify it under the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
