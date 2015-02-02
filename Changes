@@ -1,5 +1,11 @@
 Revision history for Perl extension String::Template.
 
+0.14  Mon Feb 2, 2015
+  - Documentation fixes
+
+0.12  Mon Oct 13, 2014
+  - Fix time zone related test failures on Windows Perl
+
 0.11  Wed Oct  3 08:03:19 EDT 2012
         - fix tests in other time zones
  

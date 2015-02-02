@@ -11,7 +11,7 @@ use DateTime::Format::Strptime;
 our @EXPORT = qw(expand_string missing_values expand_stringi);
 our @EXPORT_OK = qw(expand_hash);
 
-our $VERSION = '0.12';
+our $VERSION = '0.14';
 
 my %special =
 (

@@ -4,7 +4,7 @@
       "Brian Duggan <brian.duggan@nasa.gov>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.421",
+   "generated_by" : "Module::Build version 0.4202",
    "license" : [
       "perl_5"
    ],
@@ -30,7 +30,7 @@
    "provides" : {
       "String::Template" : {
          "file" : "lib/String/Template.pm",
-         "version" : "0.12"
+         "version" : "0.14"
       }
    },
    "release_status" : "stable",
@@ -45,5 +45,5 @@
          "url" : "https://github.com/plicease/String-Template"
       }
    },
-   "version" : "0.12"
+   "version" : "0.14"
 }
