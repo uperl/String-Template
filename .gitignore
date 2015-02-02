@@ -1,0 +1,7 @@
+/Build
+/Build.bat
+/MYMETA.*
+/_build
+/blib
+*.bak
+/String-Template-*

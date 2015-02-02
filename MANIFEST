@@ -3,7 +3,7 @@ Changes
 eg/example.pl
 eg/hashexample.pl
 lib/String/Template.pm
-Makefile.PL
+LICENSE
 MANIFEST			This list of files
 META.json
 META.yml

@@ -4,6 +4,14 @@ BEGIN { use_ok('String::Template') };
 
 $ENV{TZ} = 'EST5EDT'; # override so test in local TZ will succeed
 
+if($^O eq 'MSWin32') {
+  # it would be nice to use POSIX for this
+  # instead since that is a public interface
+  # but of course Strawberry has borked it.
+  require Time::Piece;
+  Time::Piece::_tzset();
+}
+
 #########################
 
 my %fields = ( num => 2, str => 'this', date => 'Feb 27, 2008' );
