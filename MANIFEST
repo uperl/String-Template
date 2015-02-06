@@ -15,3 +15,5 @@ t/Expand.t
 t/expand_hash.t
 t/Insensitive.t
 t/Undef.t
+t/pod-coverage.t
+t/pod.t
