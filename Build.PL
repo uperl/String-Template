@@ -12,6 +12,7 @@ my $builder = Module::Build->new(
         'Date::Parse' => 0,
         POSIX => 0,
         'DateTime::Format::Strptime' => 0,
+        'perl' => '5.006000',
     },
     test_requires => {
         $^O eq 'MSWin32' ? ('Time::Piece' => '1.17') : (),

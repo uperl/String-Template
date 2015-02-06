@@ -4,24 +4,25 @@ author:
   - 'Brian Duggan <brian.duggan@nasa.gov>'
 build_requires: {}
 configure_requires:
-  Module::Build: 0.36
+  Module::Build: '0.36'
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4202, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Module::Build version 0.4211, CPAN::Meta::Converter version 2.143240'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: String-Template
 provides:
   String::Template:
     file: lib/String/Template.pm
-    version: 0.14
+    version: '0.14'
 requires:
-  Date::Parse: 0
-  DateTime::Format::Strptime: 0
-  POSIX: 0
+  Date::Parse: '0'
+  DateTime::Format::Strptime: '0'
+  POSIX: '0'
+  perl: '5.006000'
 resources:
   bugtracker: https://github.com/plicease/String-Template/issues
   license: http://dev.perl.org/licenses/
   repository: https://github.com/plicease/String-Template
-version: 0.14
+version: '0.14'

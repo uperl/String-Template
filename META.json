@@ -4,7 +4,7 @@
       "Brian Duggan <brian.duggan@nasa.gov>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4202",
+   "generated_by" : "Module::Build version 0.4211",
    "license" : [
       "perl_5"
    ],
@@ -23,7 +23,8 @@
          "requires" : {
             "Date::Parse" : "0",
             "DateTime::Format::Strptime" : "0",
-            "POSIX" : "0"
+            "POSIX" : "0",
+            "perl" : "5.006000"
          }
       }
    },
