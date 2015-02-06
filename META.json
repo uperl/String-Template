@@ -31,7 +31,7 @@
    "provides" : {
       "String::Template" : {
          "file" : "lib/String/Template.pm",
-         "version" : "0.14"
+         "version" : "0.15"
       }
    },
    "release_status" : "stable",
@@ -46,5 +46,5 @@
          "url" : "https://github.com/plicease/String-Template"
       }
    },
-   "version" : "0.14"
+   "version" : "0.15"
 }

@@ -15,7 +15,7 @@ name: String-Template
 provides:
   String::Template:
     file: lib/String/Template.pm
-    version: '0.14'
+    version: '0.15'
 requires:
   Date::Parse: '0'
   DateTime::Format::Strptime: '0'
@@ -25,4 +25,4 @@ resources:
   bugtracker: https://github.com/plicease/String-Template/issues
   license: http://dev.perl.org/licenses/
   repository: https://github.com/plicease/String-Template
-version: '0.14'
+version: '0.15'
