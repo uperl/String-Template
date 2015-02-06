@@ -6,7 +6,6 @@ use warnings;
 use base 'Exporter';
 use POSIX;
 use Date::Parse;
-use DateTime::Format::Strptime;
 
 our @EXPORT = qw(expand_string missing_values expand_stringi);
 our @EXPORT_OK = qw(expand_hash);
