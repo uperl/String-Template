@@ -4,6 +4,10 @@ use strict;
 use warnings;
 use Test::More;
 
+unless ( $ENV{RELEASE_TESTING} ) {
+  plan skip_all => 'these tests are for release candidate testing';
+}
+
 # Ensure a recent version of Test::Pod
 my $min_tp = 1.22;
 eval "use Test::Pod $min_tp";

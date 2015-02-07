@@ -13,8 +13,6 @@ my $builder = Module::Build->new(
         POSIX => 0,
     },
     test_requires => {
-        'Test::Pod' => 0,
-        'Test::Pod::Coverage' => 0,
         $^O eq 'MSWin32' ? ('Time::Piece' => '1.17') : (),
     },
     configure_requires => {
