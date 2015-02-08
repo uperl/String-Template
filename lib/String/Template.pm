@@ -196,6 +196,8 @@ Returns undef if there are unexpanded templates left, otherwise true.
 
 =item Curt Tilmes
 
+=item Jeremy Mates (thirg, JMATES)
+
 =back
 
 =head1 SEE ALSO
