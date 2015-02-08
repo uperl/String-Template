@@ -22,7 +22,6 @@
       "runtime" : {
          "requires" : {
             "Date::Parse" : "0",
-            "DateTime::Format::Strptime" : "0",
             "POSIX" : "0",
             "perl" : "5.006000"
          }
@@ -31,7 +30,7 @@
    "provides" : {
       "String::Template" : {
          "file" : "lib/String/Template.pm",
-         "version" : "0.15"
+         "version" : "0.16"
       }
    },
    "release_status" : "stable",
@@ -46,5 +45,5 @@
          "url" : "https://github.com/plicease/String-Template"
       }
    },
-   "version" : "0.15"
+   "version" : "0.16"
 }

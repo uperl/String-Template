@@ -1,5 +1,9 @@
 Revision history for Perl extension String::Template.
 
+0.16  Sun Feb 8, 2015
+  - Remove DateTime::Format::Strptime as a prereq
+    as it is not being used.
+
 0.15  Fri Feb 6, 2015
   - Specify Perl 5.6.0 as a prereq
 
