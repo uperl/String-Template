@@ -1,4 +1,8 @@
-Revision history for Perl extension String::Template.
+Revision history for Perl extension {{$dist->name}}
+
+{{$NEXT}}
+  - Documentation tweaks
+  - Migrate to Dist::Zilla
 
 0.16  Sun Feb 8, 2015
   - Remove DateTime::Format::Strptime as a prereq
