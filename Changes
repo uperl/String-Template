@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+0.17      2015-04-13 13:49:24 -0400
   - Documentation tweaks
   - Migrate to Dist::Zilla
   - All tests use string and warnings
