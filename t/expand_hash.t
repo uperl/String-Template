@@ -1,5 +1,6 @@
+use strict;
+use warnings;
 use Test::More;
-
 use String::Template qw(expand_hash);
 use Data::Dumper;
 

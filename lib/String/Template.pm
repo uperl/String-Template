@@ -2,6 +2,7 @@ package String::Template;
 
 use strict;
 use warnings;
+use 5.008001;
 use base 'Exporter';
 use POSIX;
 use Date::Parse;

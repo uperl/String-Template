@@ -1,3 +1,5 @@
+use strict;
+use warnings;
 use String::Template qw/missing_values/;
 use Test::More qw/no_plan/;
 
@@ -16,5 +18,3 @@ my @lots = missing_values( "<hello%2d> <world!a> <out#x> <there:y>", {} );
 is_deeply [ sort @lots ],
           [ qw/hello out there world/ ],
           "missing values with modifiers";
-
-1;

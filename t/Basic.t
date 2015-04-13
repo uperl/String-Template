@@ -1,8 +1,7 @@
-use Test::More tests => 2;
-
-BEGIN { use_ok('String::Template') };
-
-#########################
+use strict;
+use warnings;
+use Test::More tests => 1;
+use String::Template;
 
 my %fields = ( num => 2, str => 'this', date => 'Feb 27, 2008' );
 

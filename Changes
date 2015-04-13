@@ -3,6 +3,8 @@ Revision history for Perl extension {{$dist->name}}
 {{$NEXT}}
   - Documentation tweaks
   - Migrate to Dist::Zilla
+  - All tests use string and warnings
+  - Require Perl 5.8.1
 
 0.16  Sun Feb 8, 2015
   - Remove DateTime::Format::Strptime as a prereq

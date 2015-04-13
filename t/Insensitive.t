@@ -1,6 +1,7 @@
-use Test::More tests => 10;
-
-BEGIN { use_ok('String::Template') };
+use strict;
+use warnings;
+use Test::More tests => 9;
+use String::Template;
 
 $ENV{TZ} = 'EST5EDT'; # override so test in local TZ will succeed
 
@@ -40,6 +41,3 @@ is (expand_stringi( 'local: <date:%Y-%m-%d %H:%M> utc: <date!%Y-%m-%d %H:%M>',
 is (expand_stringi( 'local: <dAte:%Y-%m-%d %H:%M> utc: <DATE!%Y-%m-%d %H:%M>',
     { daTE => '2008-02-27T17:57:00Z' } ),
     'local: 2008-02-27 12:57 utc: 2008-02-27 17:57' );
-
-1;
-
