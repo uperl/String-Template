@@ -182,20 +182,20 @@ sub expand_hash
 
     while ($changeflag)
     {    
-	$changeflag = 0;
-	$missing = 0;
-	foreach my $key (sort keys %$hash)
-	{
-	    my $newstr = expand_string($hash->{$key}, $hash, 1);
-	    
-	    if ($newstr ne $hash->{$key})
-	    {
-		$hash->{$key} = $newstr;
-		$changeflag = 1;
-	    }
-	    $missing++ if $newstr =~ /<[^>]+>/;
-	}
-	last unless --$maxdepth;
+        $changeflag = 0;
+        $missing = 0;
+        foreach my $key (sort keys %$hash)
+        {
+            my $newstr = expand_string($hash->{$key}, $hash, 1);
+            
+            if ($newstr ne $hash->{$key})
+            {
+                $hash->{$key} = $newstr;
+                $changeflag = 1;
+            }
+            $missing++ if $newstr =~ /<[^>]+>/;
+        }
+        last unless --$maxdepth;
     }
     return $missing ? undef : 1;
 }

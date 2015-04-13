@@ -8,58 +8,58 @@ my @TestCases =
 (
     {
         Hash => 
-	{
-	    X => '<Y>',
-	    Y => 1
-	},
-	Correct =>
-	{
-	    X => 1,
-	    Y => 1
-	},
-	Status => 1
+        {
+            X => '<Y>',
+            Y => 1
+        },
+        Correct =>
+        {
+            X => 1,
+            Y => 1
+        },
+        Status => 1
     },
     {
         Hash => 
-	{
-	    X => '<Y>',
-	    Y => '<Z>',
-	    Z => 1
-	},
-	Correct =>
-	{
-	    X => 1,
-	    Y => 1,
-	    Z => 1
-	},
-	Status => 1
+        {
+            X => '<Y>',
+            Y => '<Z>',
+            Z => 1
+        },
+        Correct =>
+        {
+            X => 1,
+            Y => 1,
+            Z => 1
+        },
+        Status => 1
     },
     {
         Hash => 
-	{
-	    X => '<Y>',
-	    Y => '<Z>',
-	    Z => 1
-	},
-	Correct =>
-	{
-	    X => '<Z>',
-	    Y => 1,
-	    Z => 1
-	},
-	Status => undef,
-	MaxDepth => 1	
+        {
+            X => '<Y>',
+            Y => '<Z>',
+            Z => 1
+        },
+        Correct =>
+        {
+            X => '<Z>',
+            Y => 1,
+            Z => 1
+        },
+        Status => undef,
+        MaxDepth => 1   
     },
     {
         Hash => 
-	{
-	    X => '<Y>',
-	},
-	Correct =>
-	{
-	    X => '<Y>'
-	},
-	Status => undef
+        {
+            X => '<Y>',
+        },
+        Correct =>
+        {
+            X => '<Y>'
+        },
+        Status => undef
     },
 );
 
