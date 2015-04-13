@@ -19,34 +19,34 @@ Revision history for Perl extension {{$dist->name}}
 0.12  Mon Oct 13, 2014
   - Fix time zone related test failures on Windows Perl
 
-0.11  Wed Oct  3 08:03:19 EDT 2012
-        - fix tests in other time zones
+0.11  Wed Oct  3, 2012 08:03:19
+  - fix tests in other time zones
  
-0.10  Tue Oct  2 11:35:04 EDT 2012
-        - cleanup for public release
+0.10  Tue Oct  2, 2012 11:35:04
+  - cleanup for public release
 
-0.09  Fri Sep  7 14:58:46 EDT 2012
-        - expand_stringi now supports special chars
+0.09  Fri Sep  7, 2012 14:58:46
+  - expand_stringi now supports special chars
 
-0.08  Fri Sep  7 13:13:19 EDT 2012
-        - added expand_stringi
+0.08  Fri Sep  7, 2012 13:13:19
+  - added expand_stringi
 
-0.07  Tue Oct 13 11:31:55 EDT 2009
-        - Added expand_hash() function
+0.07  Tue Oct 13, 2009 11:31:55
+  - Added expand_hash() function
 
-0.05  Mon Mar  2 16:45:09 EST 2009
-        - Added '!' special for date/times from UTC
+0.05  Mon Mar  2, 2009 16:45:09
+  - Added '!' special for date/times from UTC
 
-0.04  Wed Sep  3 08:50:11 EDT 2008
-        - Added $undef_flag to control handling of undefined fields
+0.04  Wed Sep  3, 2008 08:50:11
+  - Added $undef_flag to control handling of undefined fields
 
-0.03  Fri Aug 15 07:58:45 EDT 2008
-        - Added '#' special for expanding with substr
-        - Remove untemplate()
+0.03  Fri Aug 15, 2008 07:58:45
+  - Added '#' special for expanding with substr
+  - Remove untemplate()
 
-0.02  Mon Jun  2 07:57:06 EDT 2008
-        - If fields are undefined, just replace with ''
-        - Added more test cases
+0.02  Mon Jun  2, 2008 07:57:06
+  - If fields are undefined, just replace with ''
+  - Added more test cases
 
-0.01  Fri Mar  7 10:49:14 2008
-       - original version
+0.01  Fri Mar  7, 2008 10:49:14
+  - original version
