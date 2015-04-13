@@ -67,7 +67,9 @@ values for all such keys are defined.
 
 Returns a list of missing keys or an empty list if no keys were missing.
 
-## $status = expand\_hash($hash\[, $maxdepth\]);
+## expand\_hash
+
+    my $status = expand_hash($hash[, $maxdepth]);
 
 Expand a hash of templates/values.  This function will repeatedly
 replace templates in the values of the hash with the values of the

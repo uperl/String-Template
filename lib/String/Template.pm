@@ -160,7 +160,9 @@ sub missing_values
     return @missing;
 }
 
-=head2 $status = expand_hash($hash[, $maxdepth]);
+=head2 expand_hash
+
+ my $status = expand_hash($hash[, $maxdepth]);
 
 Expand a hash of templates/values.  This function will repeatedly
 replace templates in the values of the hash with the values of the
