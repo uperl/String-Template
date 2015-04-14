@@ -2,6 +2,10 @@ Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
 
+0.18      2015-04-14 05:09:31 -0400
+  - Time::Piece is only a test requirement on MSWin32 again
+    (for 0.17 it was set as a test requirement everywhere)
+
 0.17      2015-04-13 13:49:24 -0400
   - Documentation tweaks
   - Migrate to Dist::Zilla
