@@ -12,15 +12,14 @@ use Date::Parse;
 
 =head1 SYNOPSIS
 
-  use String::Template;
-
-  my %fields = ( num => 2, str => 'this', date => 'Feb 27, 2008' );
-
-  my $template = "...<num%04d>...<str>...<date:%Y/%m/%d>...\n";
-
-  print expand_string($template, \%fields);
-
-  prints: "...0002...this...2008/02/27..."
+ use String::Template;
+ 
+ my %fields = ( num => 2, str => 'this', date => 'Feb 27, 2008' );
+ 
+ my $template = "...<num%04d>...<str>...<date:%Y/%m/%d>...\n";
+ 
+ print expand_string($template, \%fields);
+ #prints: "...0002...this...2008/02/27..."
 
 =head1 DESCRIPTION
 

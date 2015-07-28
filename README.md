@@ -5,14 +5,13 @@ Fills in string templates from hash of fields
 # SYNOPSIS
 
     use String::Template;
-
+    
     my %fields = ( num => 2, str => 'this', date => 'Feb 27, 2008' );
-
+    
     my $template = "...<num%04d>...<str>...<date:%Y/%m/%d>...\n";
-
+    
     print expand_string($template, \%fields);
-
-    prints: "...0002...this...2008/02/27..."
+    #prints: "...0002...this...2008/02/27..."
 
 # DESCRIPTION
 
