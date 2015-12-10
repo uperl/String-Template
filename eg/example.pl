@@ -2,7 +2,6 @@
 
 use warnings;
 use strict;
-
 use String::Template;
 
 my %fields = ( num => 2, str => 'this', date => 'Feb 27, 2008' );
