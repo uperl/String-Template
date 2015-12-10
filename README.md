@@ -1,4 +1,4 @@
-# String::Template
+# String::Template [![Build Status](https://secure.travis-ci.org/plicease/String-Template.png)](http://travis-ci.org/plicease/String-Template)
 
 Fills in string templates from hash of fields
 
@@ -24,7 +24,7 @@ Generate strings based on a template.
     my $str = expand_string($template, \%fields, $undef_flag);
 
 Fills in a simple template with values from a hash, replacing tokens
-like "<fieldname>" with the value from the hash $fields->{fieldname}.
+like "&lt;fieldname>" with the value from the hash $fields->{fieldname}.
 
 Some special characters can be used to impose formatting on the
 fields:
@@ -86,7 +86,7 @@ syntax.
 
 Original author: Brian Duggan
 
-Current maintainer: Graham Ollis <plicease@cpan.org>
+Current maintainer: Graham Ollis &lt;plicease@cpan.org>
 
 Contributors:
 
