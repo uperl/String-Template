@@ -1,6 +1,6 @@
 Data::Dumper
 Date::Parse
-Module::Build
+ExtUtils::MakeMaker
 POSIX
 Test::More
 Time::Piece
