@@ -116,6 +116,9 @@ subtest 'extended field' => sub {
   is expand_string( '<str{"%s"\}}>', { str => 'foo' } ),
     '"foo"}', "Escaped curly brace";
 
+  is expand_string( '<str{%s}>', { str => 'foo' } ),
+    'foo', "Can have tight extended fields";
+
   is expand_string( $template, { str => undef }, 1 ),
     $template, "Template is unchanged if undefined";
 
