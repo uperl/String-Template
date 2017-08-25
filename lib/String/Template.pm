@@ -47,7 +47,7 @@ my %special =
 
 my $specials = join('', keys %special);
 my $specialre = qr/^([^{$specials]+)([{$specials])(.+)$/;
-my $bracketre = qr/^([^{$specials]+)([{$specials])(.+)(?<!\\)\}(.*)$/;
+my $bracketre = qr/^([^$specials]*?)([{$specials])(.*?)(?<!\\)\}(.*)$/;
 
 $special{'{'} = sub {
     my ($field, $replace) = @_;
