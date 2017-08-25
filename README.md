@@ -49,6 +49,22 @@ it is false (default), undefined fields are simply replace with an
 empty string.  If set to true, the field is kept verbatim.  This can
 be useful for multiple expansion passes.
 
+The `{` character is specially special, since it allows fields to
+contain additional characters that are not intended for formatting.
+This is specially useful for specifying additional content inside a
+field that may not exist in the hash, and which should be entirely
+replaced with the empty string.
+
+This makes it possible to have templates like this:
+
+    my $template = '<name><nick{ "%s"}><surname{ %s}>';
+
+    my $mack = { name => 'Mack', nick    => 'The Knife' };
+    my $jack = { name => 'Jack', surname => 'Sheppard'  };
+
+    expand_string( $template, $mack ); # Returns 'Mack "The Knife"'
+    expand_string( $template, $jack ); # Returns 'Jack Shepard'
+
 ## expand\_stringi
 
     my $str = expand_stringi($template, \%fields, $undef_flag);
@@ -86,13 +102,15 @@ syntax.
 
 Original author: Brian Duggan
 
-Current maintainer: Graham Ollis &lt;plicease@cpan.org>
+Current maintainer: Graham Ollis <plicease@cpan.org>
 
 Contributors:
 
 Curt Tilmes
 
 Jeremy Mates (thirg, JMATES)
+
+José Joaquín Atria
 
 # COPYRIGHT AND LICENSE
 

@@ -29,6 +29,7 @@ Generate strings based on a template.
 
 our @EXPORT = qw(expand_string missing_values expand_stringi);
 our @EXPORT_OK = qw(expand_hash);
+our %EXPORT_TAGS = ( all => [@EXPORT, @EXPORT_OK] );
 
 my %special =
 (
