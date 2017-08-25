@@ -63,7 +63,7 @@ This makes it possible to have templates like this:
     my $jack = { name => 'Jack', surname => 'Sheppard'  };
 
     expand_string( $template, $mack ); # Returns 'Mack "The Knife"'
-    expand_string( $template, $jack ); # Returns 'Jack Shepard'
+    expand_string( $template, $jack ); # Returns 'Jack Sheppard'
 
 ## expand\_stringi
 
