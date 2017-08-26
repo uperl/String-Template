@@ -45,7 +45,7 @@ For the ':' strftime formats, the field is parsed by [Date::Parse](https://metac
 so it can handle any format that can handle.
 
 Handling of undefined fields can be controlled with $undef\_flag.  If
-it is false (default), undefined fields are simply replace with an
+it is false (default), undefined fields are simply replaced with an
 empty string.  If set to true, the field is kept verbatim.  This can
 be useful for multiple expansion passes.
 
