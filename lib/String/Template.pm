@@ -56,7 +56,7 @@ Same as C<:>, but with L<gmtime|perldoc/gmtime> instead of L<localtime|perldoc/l
 
 Treat like args to L<substr|perldoc/substr>; example C<< <str#0,2> >> or C<< <str#4> >>.
 
-=item C<{}> and C<}>
+=item C<{> and C<}>
 
 [version 0.20]
 

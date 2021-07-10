@@ -48,7 +48,7 @@ fields:
 
     Treat like args to [substr](https://metacpan.org/pod/perldoc#substr); example `<str#0,2>` or `<str#4>`.
 
-- `{}` and `}`
+- `{` and `}`
 
     \[version 0.20\]
 
