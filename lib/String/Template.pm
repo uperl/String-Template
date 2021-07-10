@@ -25,6 +25,59 @@ use Date::Parse;
 
 Generate strings based on a template.
 
+=head2 template language
+
+Replacement tokens are denoted with angle brackets.  That is C<< <fieldname> >>
+is replaced by the values in the C<< \%fields >> hash reference provided.
+
+Some special characters can be used to impose formatting on the
+fields:
+
+=over 4
+
+=item C<%>
+
+Treat like a L<sprintf|perldoc/sprintf> format, example: C<< <int%02d> >>.
+
+=item C<:>
+
+Treat like a L<POSIX/strftime> format, example C<< <date:%Y-%m-%d> >>.
+
+The field is parsed by L<Date::Parse>, so it can handle any format that it
+can handle.
+
+=item C<!>
+
+[version 0.05]
+
+Same as C<:>, but with L<gmtime|perldoc/gmtime> instead of L<localtime|perldoc/localtime>.
+
+=item C<#>
+
+Treat like args to L<substr|perldoc/substr>; example C<< <str#0,2> >> or C<< <str#4> >>.
+
+=item C<{}> and C<}>
+
+[version 0.20]
+
+The C<{> character is specially special, since it allows fields to
+contain additional characters that are not intended for formatting.
+This is specially useful for specifying additional content inside a
+field that may not exist in the hash, and which should be entirely
+replaced with the empty string.
+
+This makes it possible to have templates like this:
+
+ my $template = '<name><nick{ "%s"}><surname{ %s}>';
+
+ my $mack = { name => 'Mack', nick    => 'The Knife' };
+ my $jack = { name => 'Jack', surname => 'Sheppard'  };
+
+ expand_string( $template, $mack ); # Returns 'Mack "The Knife"'
+ expand_string( $template, $jack ); # Returns 'Jack Sheppard'
+
+=back
+
 =cut
 
 our @EXPORT = qw(expand_string missing_values expand_stringi);
@@ -79,51 +132,20 @@ sub _replace
 
 =head1 FUNCTIONS
 
+All functions are exported by default, or by request, except for L</expand_hash>
+
 =head2 expand_string
 
+ my $str = expand_string($template, \%fields);
  my $str = expand_string($template, \%fields, $undef_flag);
 
 Fills in a simple template with values from a hash, replacing tokens
-like "<fieldname>" with the value from the hash $fields->{fieldname}.
+like C<< <fieldname> >> with the value from the hash C<< $fields{fieldname} >>.
 
-Some special characters can be used to impose formatting on the
-fields:
-
- % - treat like a sprintf() format
-     e.g.  <int%02d>
-
- : - treat like a L<POSIX::strftime()> format
-     e.g. <date:%Y-%m-%d>
-
- ! - Just like ':', but with gmtime instead of localtime
-     e.g. <gmdate!%Y-%m-%d %H:%M>
-
- # - treat like args to substr()
-     e.g. <str#0,2> or <str#4>
-
-For the ':' strftime formats, the field is parsed by L<Date::Parse>,
-so it can handle any format that can handle.
-
-Handling of undefined fields can be controlled with $undef_flag.  If
+Handling of undefined fields can be controlled with C<$undef_flag>.  If
 it is false (default), undefined fields are simply replaced with an
 empty string.  If set to true, the field is kept verbatim.  This can
 be useful for multiple expansion passes.
-
-The C<{> character is specially special, since it allows fields to
-contain additional characters that are not intended for formatting.
-This is specially useful for specifying additional content inside a
-field that may not exist in the hash, and which should be entirely
-replaced with the empty string.
-
-This makes it possible to have templates like this:
-
- my $template = '<name><nick{ "%s"}><surname{ %s}>';
-
- my $mack = { name => 'Mack', nick    => 'The Knife' };
- my $jack = { name => 'Jack', surname => 'Sheppard'  };
-
- expand_string( $template, $mack ); # Returns 'Mack "The Knife"'
- expand_string( $template, $jack ); # Returns 'Jack Sheppard'
 
 =cut
 
@@ -142,6 +164,9 @@ sub expand_string
 
 =head2 expand_stringi
 
+[version 0.08]
+
+ my $str = expand_stringi($template, \%fields);
  my $str = expand_stringi($template, \%fields, $undef_flag);
 
 expand_stringi works just like expand_string, except that tokens
@@ -161,6 +186,7 @@ sub expand_stringi
 
 =head2 missing_values
 
+ my @missing = missing_values($template, \%fields);
  my @missing = missing_values($template, \%fields, $dont_allow_undefs);
 
 Checks to see if the template variables in a string template exist
@@ -186,15 +212,19 @@ sub missing_values
 
 =head2 expand_hash
 
+[version 0.07]
+
  my $status = expand_hash($hash);
  my $status = expand_hash($hash, $maxdepth);
 
 Expand a hash of templates/values.  This function will repeatedly
 replace templates in the values of the hash with the values of the
-hash they reference, until either all "<>" templates are gone, or
+hash they reference, until either all C<< <> >> templates are gone, or
 it has iterated $maxdepth times (default 10).
 
-Returns undef if there are unexpanded templates left, otherwise true.
+Returns C<undef> if there are unexpanded templates left, otherwise true.
+
+This function must be explicitly exported.
 
 =cut
 
