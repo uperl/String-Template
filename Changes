@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+0.22      2021-07-10 03:44:53 -0600
   - Documentation fixes (gh#9)
   - [internal] do not import everything from POSIX (gh#9)
 
