@@ -103,6 +103,8 @@ and hash keys are treated case insensitively.
 
 ## missing\_values
 
+\[version 0.06\]
+
 ```perl
 my @missing = missing_values($template, \%fields);
 my @missing = missing_values($template, \%fields, $dont_allow_undefs);
