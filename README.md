@@ -1,4 +1,4 @@
-# String::Template ![linux](https://github.com/uperl/String-Template/workflows/linux/badge.svg) ![macos](https://github.com/uperl/String-Template/workflows/macos/badge.svg) ![windows](https://github.com/uperl/String-Template/workflows/windows/badge.svg) ![cygwin](https://github.com/uperl/String-Template/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/uperl/String-Template/workflows/msys2-mingw/badge.svg)
+# String::Template ![static](https://github.com/uperl/String-Template/workflows/static/badge.svg) ![linux](https://github.com/uperl/String-Template/workflows/linux/badge.svg) ![macos](https://github.com/uperl/String-Template/workflows/macos/badge.svg) ![windows](https://github.com/uperl/String-Template/workflows/windows/badge.svg) ![cygwin](https://github.com/uperl/String-Template/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/uperl/String-Template/workflows/msys2-mingw/badge.svg)
 
 Fills in string templates from hash of fields
 
@@ -24,7 +24,7 @@ Generate strings based on a template.
 Replacement tokens are denoted with angle brackets.  That is `<fieldname>`
 is replaced by the values in the `\%fields` hash reference provided.
 
-Some special characters can be used to impose formatting on the
+Some special characters can be used after the field name to impose formatting on the
 fields:
 
 - `%`
@@ -82,7 +82,7 @@ my $str = expand_string($template, \%fields, $undef_flag);
 ```
 
 Fills in a simple template with values from a hash, replacing tokens
-like `<fieldname>` with the value from the hash `$fields{fieldname}`.
+with the value from the hash `$fields{fieldname}`.
 
 Handling of undefined fields can be controlled with `$undef_flag`.  If
 it is false (default), undefined fields are simply replaced with an
@@ -98,7 +98,7 @@ my $str = expand_stringi($template, \%fields);
 my $str = expand_stringi($template, \%fields, $undef_flag);
 ```
 
-expand\_stringi works just like expand\_string, except that tokens
+`expand_stringi` works just like ["expand\_string"](#expand_string), except that tokens
 and hash keys are treated case insensitively.
 
 ## missing\_values
@@ -109,7 +109,7 @@ my @missing = missing_values($template, \%fields, $dont_allow_undefs);
 ```
 
 Checks to see if the template variables in a string template exist
-in a hash.  Set $dont\_allow\_undefs to 1 to also check to see if the
+in a hash.  Set `$dont_allow_undefs` to 1 to also check to see if the
 values for all such keys are defined.
 
 Returns a list of missing keys or an empty list if no keys were missing.
@@ -125,8 +125,8 @@ my $status = expand_hash($hash, $maxdepth);
 
 Expand a hash of templates/values.  This function will repeatedly
 replace templates in the values of the hash with the values of the
-hash they reference, until either all `<>` templates are gone, or
-it has iterated $maxdepth times (default 10).
+hash they reference, until either all `<fieldname>` templates are gone, or
+it has iterated `$maxdepth` times (default 10).
 
 Returns `undef` if there are unexpanded templates left, otherwise true.
 

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use 5.008001;
 use base 'Exporter';
-use POSIX;
+use POSIX ();
 use Date::Parse;
 
 # ABSTRACT: Fills in string templates from hash of fields
@@ -30,7 +30,7 @@ Generate strings based on a template.
 Replacement tokens are denoted with angle brackets.  That is C<< <fieldname> >>
 is replaced by the values in the C<< \%fields >> hash reference provided.
 
-Some special characters can be used to impose formatting on the
+Some special characters can be used after the field name to impose formatting on the
 fields:
 
 =over 4
@@ -69,10 +69,10 @@ replaced with the empty string.
 This makes it possible to have templates like this:
 
  my $template = '<name><nick{ "%s"}><surname{ %s}>';
-
+ 
  my $mack = { name => 'Mack', nick    => 'The Knife' };
  my $jack = { name => 'Jack', surname => 'Sheppard'  };
-
+ 
  expand_string( $template, $mack ); # Returns 'Mack "The Knife"'
  expand_string( $template, $jack ); # Returns 'Jack Sheppard'
 
@@ -88,9 +88,9 @@ my %special =
 (
     '%' => sub { sprintf("%$_[0]", $_[1]) },
 
-    ':' => sub { strftime($_[0], localtime(str2time($_[1]))) },
+    ':' => sub { POSIX::strftime($_[0], localtime(str2time($_[1]))) },
 
-    '!' => sub { strftime($_[0], gmtime(str2time($_[1]))) },
+    '!' => sub { POSIX::strftime($_[0], gmtime(str2time($_[1]))) },
 
     '#' => sub { my @args = split(/\s*,\s*/, $_[0]);
                  defined $args[1]
@@ -140,7 +140,7 @@ All functions are exported by default, or by request, except for L</expand_hash>
  my $str = expand_string($template, \%fields, $undef_flag);
 
 Fills in a simple template with values from a hash, replacing tokens
-like C<< <fieldname> >> with the value from the hash C<< $fields{fieldname} >>.
+with the value from the hash C<< $fields{fieldname} >>.
 
 Handling of undefined fields can be controlled with C<$undef_flag>.  If
 it is false (default), undefined fields are simply replaced with an
@@ -169,7 +169,7 @@ sub expand_string
  my $str = expand_stringi($template, \%fields);
  my $str = expand_stringi($template, \%fields, $undef_flag);
 
-expand_stringi works just like expand_string, except that tokens
+C<expand_stringi> works just like L</expand_string>, except that tokens
 and hash keys are treated case insensitively.
 
 =cut
@@ -190,7 +190,7 @@ sub expand_stringi
  my @missing = missing_values($template, \%fields, $dont_allow_undefs);
 
 Checks to see if the template variables in a string template exist
-in a hash.  Set $dont_allow_undefs to 1 to also check to see if the
+in a hash.  Set C<$dont_allow_undefs> to 1 to also check to see if the
 values for all such keys are defined.
 
 Returns a list of missing keys or an empty list if no keys were missing.
@@ -219,8 +219,8 @@ sub missing_values
 
 Expand a hash of templates/values.  This function will repeatedly
 replace templates in the values of the hash with the values of the
-hash they reference, until either all C<< <> >> templates are gone, or
-it has iterated $maxdepth times (default 10).
+hash they reference, until either all C<< <fieldname> >> templates are gone, or
+it has iterated C<$maxdepth> times (default 10).
 
 Returns C<undef> if there are unexpanded templates left, otherwise true.
 
@@ -238,13 +238,13 @@ sub expand_hash
     my $missing = 1;
 
     while ($changeflag)
-    {    
+    {
         $changeflag = 0;
         $missing = 0;
         foreach my $key (sort keys %$hash)
         {
             my $newstr = expand_string($hash->{$key}, $hash, 1);
-            
+
             if ($newstr ne $hash->{$key})
             {
                 $hash->{$key} = $newstr;
