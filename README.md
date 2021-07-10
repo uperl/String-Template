@@ -97,7 +97,8 @@ Returns a list of missing keys or an empty list if no keys were missing.
 ## expand\_hash
 
 ```perl
-my $status = expand_hash($hash[, $maxdepth]);
+my $status = expand_hash($hash);
+my $status = expand_hash($hash, $maxdepth);
 ```
 
 Expand a hash of templates/values.  This function will repeatedly
