@@ -29,7 +29,7 @@ fields:
 
 - `%`
 
-    Treat like a [sprintf](https://metacpan.org/pod/perldoc#sprintf) format, example: `<int%02d>`.
+    Treat like a [sprintf](https://metacpan.org/pod/perlfunc#sprintf) format, example: `<int%02d>`.
 
 - `:`
 
@@ -42,11 +42,11 @@ fields:
 
     \[version 0.05\]
 
-    Same as `:`, but with [gmtime](https://metacpan.org/pod/perldoc#gmtime) instead of [localtime](https://metacpan.org/pod/perldoc#localtime).
+    Same as `:`, but with [gmtime](https://metacpan.org/pod/perlfunc#gmtime) instead of [localtime](https://metacpan.org/pod/perlfunc#localtime).
 
 - `#`
 
-    Treat like args to [substr](https://metacpan.org/pod/perldoc#substr); example `<str#0,2>` or `<str#4>`.
+    Treat like args to [substr](https://metacpan.org/pod/perlfunc#substr); example `<str#0,2>` or `<str#4>`.
 
 - `{` and `}`
 

@@ -37,7 +37,7 @@ fields:
 
 =item C<%>
 
-Treat like a L<sprintf|perldoc/sprintf> format, example: C<< <int%02d> >>.
+Treat like a L<sprintf|perlfunc/sprintf> format, example: C<< <int%02d> >>.
 
 =item C<:>
 
@@ -50,11 +50,11 @@ can handle.
 
 [version 0.05]
 
-Same as C<:>, but with L<gmtime|perldoc/gmtime> instead of L<localtime|perldoc/localtime>.
+Same as C<:>, but with L<gmtime|perlfunc/gmtime> instead of L<localtime|perlfunc/localtime>.
 
 =item C<#>
 
-Treat like args to L<substr|perldoc/substr>; example C<< <str#0,2> >> or C<< <str#4> >>.
+Treat like args to L<substr|perlfunc/substr>; example C<< <str#0,2> >> or C<< <str#4> >>.
 
 =item C<{> and C<}>
 
