@@ -186,6 +186,8 @@ sub expand_stringi
 
 =head2 missing_values
 
+[version 0.06]
+
  my @missing = missing_values($template, \%fields);
  my @missing = missing_values($template, \%fields, $dont_allow_undefs);
 
