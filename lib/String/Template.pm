@@ -186,7 +186,8 @@ sub missing_values
 
 =head2 expand_hash
 
- my $status = expand_hash($hash[, $maxdepth]);
+ my $status = expand_hash($hash);
+ my $status = expand_hash($hash, $maxdepth);
 
 Expand a hash of templates/values.  This function will repeatedly
 replace templates in the values of the hash with the values of the
@@ -234,5 +235,3 @@ L<String::Format> performs a similar function, with a different
 syntax.
 
 =cut
-
-
