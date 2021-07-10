@@ -1,6 +1,7 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+  - Documentation fixes (gh#9)
 
 0.21      2017-08-25 08:02:04 -0400
   - Allow tight fields when using curly braces (jjatria++)

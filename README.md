@@ -19,63 +19,82 @@ print expand_string($template, \%fields);
 
 Generate strings based on a template.
 
-# FUNCTIONS
+## template language
 
-## expand\_string
-
-```perl
-my $str = expand_string($template, \%fields, $undef_flag);
-```
-
-Fills in a simple template with values from a hash, replacing tokens
-like "&lt;fieldname>" with the value from the hash $fields->{fieldname}.
+Replacement tokens are denoted with angle brackets.  That is `<fieldname>`
+is replaced by the values in the `\%fields` hash reference provided.
 
 Some special characters can be used to impose formatting on the
 fields:
 
+- `%`
+
+    Treat like a [sprintf](https://metacpan.org/pod/perldoc#sprintf) format, example: `<int%02d>`.
+
+- `:`
+
+    Treat like a ["strftime" in POSIX](https://metacpan.org/pod/POSIX#strftime) format, example `<date:%Y-%m-%d>`.
+
+    The field is parsed by [Date::Parse](https://metacpan.org/pod/Date::Parse), so it can handle any format that it
+    can handle.
+
+- `!`
+
+    \[version 0.05\]
+
+    Same as `:`, but with [gmtime](https://metacpan.org/pod/perldoc#gmtime) instead of [localtime](https://metacpan.org/pod/perldoc#localtime).
+
+- `#`
+
+    Treat like args to [substr](https://metacpan.org/pod/perldoc#substr); example `<str#0,2>` or `<str#4>`.
+
+- `{}` and `}`
+
+    \[version 0.20\]
+
+    The `{` character is specially special, since it allows fields to
+    contain additional characters that are not intended for formatting.
+    This is specially useful for specifying additional content inside a
+    field that may not exist in the hash, and which should be entirely
+    replaced with the empty string.
+
+    This makes it possible to have templates like this:
+
+    ```perl
+    my $template = '<name><nick{ "%s"}><surname{ %s}>';
+
+    my $mack = { name => 'Mack', nick    => 'The Knife' };
+    my $jack = { name => 'Jack', surname => 'Sheppard'  };
+
+    expand_string( $template, $mack ); # Returns 'Mack "The Knife"'
+    expand_string( $template, $jack ); # Returns 'Jack Sheppard'
+    ```
+
+# FUNCTIONS
+
+All functions are exported by default, or by request, except for ["expand\_hash"](#expand_hash)
+
+## expand\_string
+
 ```perl
-% - treat like a sprintf() format
-    e.g.  <int%02d>
-
-: - treat like a L<POSIX::strftime()> format
-    e.g. <date:%Y-%m-%d>
-
-! - Just like ':', but with gmtime instead of localtime
-    e.g. <gmdate!%Y-%m-%d %H:%M>
-
-# - treat like args to substr()
-    e.g. <str#0,2> or <str#4>
+my $str = expand_string($template, \%fields);
+my $str = expand_string($template, \%fields, $undef_flag);
 ```
 
-For the ':' strftime formats, the field is parsed by [Date::Parse](https://metacpan.org/pod/Date::Parse),
-so it can handle any format that can handle.
+Fills in a simple template with values from a hash, replacing tokens
+like `<fieldname>` with the value from the hash `$fields{fieldname}`.
 
-Handling of undefined fields can be controlled with $undef\_flag.  If
+Handling of undefined fields can be controlled with `$undef_flag`.  If
 it is false (default), undefined fields are simply replaced with an
 empty string.  If set to true, the field is kept verbatim.  This can
 be useful for multiple expansion passes.
 
-The `{` character is specially special, since it allows fields to
-contain additional characters that are not intended for formatting.
-This is specially useful for specifying additional content inside a
-field that may not exist in the hash, and which should be entirely
-replaced with the empty string.
-
-This makes it possible to have templates like this:
-
-```perl
-my $template = '<name><nick{ "%s"}><surname{ %s}>';
-
-my $mack = { name => 'Mack', nick    => 'The Knife' };
-my $jack = { name => 'Jack', surname => 'Sheppard'  };
-
-expand_string( $template, $mack ); # Returns 'Mack "The Knife"'
-expand_string( $template, $jack ); # Returns 'Jack Sheppard'
-```
-
 ## expand\_stringi
 
+\[version 0.08\]
+
 ```perl
+my $str = expand_stringi($template, \%fields);
 my $str = expand_stringi($template, \%fields, $undef_flag);
 ```
 
@@ -85,6 +104,7 @@ and hash keys are treated case insensitively.
 ## missing\_values
 
 ```perl
+my @missing = missing_values($template, \%fields);
 my @missing = missing_values($template, \%fields, $dont_allow_undefs);
 ```
 
@@ -96,6 +116,8 @@ Returns a list of missing keys or an empty list if no keys were missing.
 
 ## expand\_hash
 
+\[version 0.07\]
+
 ```perl
 my $status = expand_hash($hash);
 my $status = expand_hash($hash, $maxdepth);
@@ -103,10 +125,12 @@ my $status = expand_hash($hash, $maxdepth);
 
 Expand a hash of templates/values.  This function will repeatedly
 replace templates in the values of the hash with the values of the
-hash they reference, until either all "<>" templates are gone, or
+hash they reference, until either all `<>` templates are gone, or
 it has iterated $maxdepth times (default 10).
 
-Returns undef if there are unexpanded templates left, otherwise true.
+Returns `undef` if there are unexpanded templates left, otherwise true.
+
+This function must be explicitly exported.
 
 # SEE ALSO
 
