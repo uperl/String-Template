@@ -1,6 +1,7 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+  - Use UTC in tests should hopefully improve reliability (gh#10)
 
 0.22      2021-07-10 03:44:53 -0600
   - Documentation fixes (gh#9)
