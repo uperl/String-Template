@@ -1,4 +1,4 @@
-# String::Template ![static](https://github.com/uperl/String-Template/workflows/static/badge.svg) ![linux](https://github.com/uperl/String-Template/workflows/linux/badge.svg) ![macos](https://github.com/uperl/String-Template/workflows/macos/badge.svg) ![windows](https://github.com/uperl/String-Template/workflows/windows/badge.svg) ![msys2-mingw](https://github.com/uperl/String-Template/workflows/msys2-mingw/badge.svg)
+# String::Template ![static](https://github.com/uperl/String-Template/workflows/static/badge.svg) ![linux](https://github.com/uperl/String-Template/workflows/linux/badge.svg) ![macos](https://github.com/uperl/String-Template/workflows/macos/badge.svg) ![windows](https://github.com/uperl/String-Template/workflows/windows/badge.svg)
 
 Fills in string templates from hash of fields
 
