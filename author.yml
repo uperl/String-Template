@@ -11,6 +11,8 @@ pod_spelling_system:
     - unexpanded
     - Joaqu
     - Jos
+    - Joaquín
+    - José
 
 pod_coverage:
   skip: 0
