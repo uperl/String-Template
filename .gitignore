@@ -1,2 +1,4 @@
 /String-Template-*
 /.build
+*.old
+*.orig

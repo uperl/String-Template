@@ -1,4 +1,4 @@
-# String::Template ![static](https://github.com/uperl/String-Template/workflows/static/badge.svg) ![linux](https://github.com/uperl/String-Template/workflows/linux/badge.svg) ![macos](https://github.com/uperl/String-Template/workflows/macos/badge.svg) ![windows](https://github.com/uperl/String-Template/workflows/windows/badge.svg) ![cygwin](https://github.com/uperl/String-Template/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/uperl/String-Template/workflows/msys2-mingw/badge.svg)
+# String::Template ![static](https://github.com/uperl/String-Template/workflows/static/badge.svg) ![linux](https://github.com/uperl/String-Template/workflows/linux/badge.svg) ![macos](https://github.com/uperl/String-Template/workflows/macos/badge.svg) ![windows](https://github.com/uperl/String-Template/workflows/windows/badge.svg) ![msys2-mingw](https://github.com/uperl/String-Template/workflows/msys2-mingw/badge.svg)
 
 Fills in string templates from hash of fields
 
@@ -155,7 +155,7 @@ José Joaquín Atria
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2015 by Brian Duggan.
+This software is copyright (c) 2015-2024 by Brian Duggan.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
